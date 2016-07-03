@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private Button button;
 
+    private int i = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,15 +39,16 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = (ImageView) findViewById(R.id.imageView);
         button = (Button) findViewById(R.id.button);
-
-        final Iterator it = arrayList.iterator();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Person person = (Person) it.next();
+                Person person = (Person) arrayList.get(i);
+
                 String url = person.getImageUrl();
                 String name = person.getName();
-
+                Log.d("clickdz", person.getImageUrl());
+                Picasso.with(getApplicationContext()).load(url).resize(500, 500).into(imageView);
+                i++;
             }
         });
     }
@@ -67,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            button.setEnabled(true);
         }
     }
 }

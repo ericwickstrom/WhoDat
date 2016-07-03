@@ -23,7 +23,8 @@
         android:text="next"
         android:id="@+id/button"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/imageView" />
+        android:layout_toStartOf="@+id/imageView"
+        android:enabled="false" />
 
     <Button
         android:layout_width="wrap_content"
