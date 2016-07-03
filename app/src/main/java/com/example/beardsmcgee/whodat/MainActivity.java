@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                checkAnswer(view);
             }
         });
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                checkAnswer(view);
             }
         });
 
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                checkAnswer(view);
             }
         });
 
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                checkAnswer(view);
             }
         });
     }
@@ -106,22 +107,42 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void displayPicture(){
-        Person person = (Person) arrayList.get(i);
-        String url = person.getImageUrl();
-        correctAnswer = person.getName();
-        Picasso.with(getApplicationContext()).load(url).resize(800, 800).into(imageView);
+    private void checkAnswer(View view){
+        Button button = (Button) view;
+
+        //todo: should put these strings in the correct file
+        String correctToast = "Correct!";
+        String incorrectToast = "Wrong! That was " + correctAnswer;
+
+        if(correctAnswer.equals(button.getText())){
+            Toast.makeText(getApplicationContext(), correctToast, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), incorrectToast, Toast.LENGTH_SHORT).show();
+        }
+        nextQuestion();
+        displayPicture();
+        displayNames();
+
+    }
+
+    private void nextQuestion(){
         i++;
         if(i >= arrayList.size()){
             i = 0;
         }
     }
 
+    private void displayPicture(){
+        Person person = (Person) arrayList.get(i);
+        String url = person.getImageUrl();
+        correctAnswer = person.getName();
+        Picasso.with(getApplicationContext()).load(url).resize(800, 800).into(imageView);
+    }
+
     private void displayNames(){
         Random random = new Random();
         int upperBound = arrayList.size()-1;
         int correctButton = random.nextInt(3);
-        String wrongAnswer;
         switch (correctButton){
             //cases 0 to 3, since Random() generates from lower bound of 0.
             case(0):
