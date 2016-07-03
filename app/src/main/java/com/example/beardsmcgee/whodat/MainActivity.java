@@ -31,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
     private Button button3;
     private Button button4;
 
-    //current position in array
-    private int i = 0;
+    //correct answer name
     private String correctAnswer;
+    //url for current picture
+    private String pictureUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +103,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            displayPicture();
-            displayNames();
+            nextQuestion();
         }
     }
 
@@ -120,23 +120,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), incorrectToast, Toast.LENGTH_SHORT).show();
         }
         nextQuestion();
-        displayPicture();
-        displayNames();
-
     }
 
     private void nextQuestion(){
-        i++;
-        if(i >= arrayList.size()){
-            i = 0;
-        }
+        Random random = new Random();
+        int current = random.nextInt(arrayList.size()-1);
+        correctAnswer = (String) arrayList.get(current).getName();
+        pictureUrl = (String) arrayList.get(current).getImageUrl();
+        displayPicture();
+        displayNames();
     }
 
     private void displayPicture(){
-        Person person = (Person) arrayList.get(i);
-        String url = person.getImageUrl();
-        correctAnswer = person.getName();
-        Picasso.with(getApplicationContext()).load(url).resize(800, 800).into(imageView);
+        Picasso.with(getApplicationContext()).load(pictureUrl).resize(800, 800).into(imageView);
     }
 
     private void displayNames(){
