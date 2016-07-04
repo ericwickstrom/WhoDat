@@ -124,8 +124,13 @@ public class MainActivity extends AppCompatActivity {
         int current = random.nextInt(arrayList.size() - 1);
         correctAnswer = (String) arrayList.get(current).getName();
         pictureUrl = (String) arrayList.get(current).getImageUrl();
-        displayPicture();
-        displayNames();
+        try{
+            displayPicture();
+        } finally {
+            displayNames();
+        }
+
+
     }
 
     private void displayPicture() {
