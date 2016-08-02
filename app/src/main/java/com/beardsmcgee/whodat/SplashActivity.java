@@ -1,4 +1,4 @@
-package com.example.beardsmcgee.whodat;
+package com.beardsmcgee.whodat;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

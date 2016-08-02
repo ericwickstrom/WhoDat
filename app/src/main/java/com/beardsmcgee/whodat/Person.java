@@ -1,4 +1,4 @@
-package com.example.beardsmcgee.whodat;
+package com.beardsmcgee.whodat;
 
 /**
  * Person object contains a name and a url reference to an image of that person.

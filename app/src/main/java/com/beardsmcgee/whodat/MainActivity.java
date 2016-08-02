@@ -1,4 +1,4 @@
-package com.example.beardsmcgee.whodat;
+package com.beardsmcgee.whodat;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

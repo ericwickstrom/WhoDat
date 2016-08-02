@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.0"
 
     defaultConfig {
-        applicationId "com.example.beardsmcgee.whodat"
+        applicationId "com.beardsmcgee.whodat"
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
